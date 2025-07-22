@@ -1,13 +1,12 @@
+import { useState } from 'react';
 import loginService from '../services/login';
 import blogService from '../services/blogs';
+import { mapBackendErrors } from '../utils/errorMessages';
 
-const LoginForm = ({
-  setUser,
-  username,
-  setUsername,
-  password,
-  setPassword,
-}) => {
+const LoginForm = ({ setUser, pushNotification }) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
   const handleLogin = async (event) => {
     event.preventDefault();
 
@@ -16,13 +15,20 @@ const LoginForm = ({
         username,
         password,
       });
+
+      window.localStorage.setItem('loggedBlogappUser', JSON.stringify(user));
       blogService.setToken(user.token);
+
       setUser(user);
       setUsername('');
       setPassword('');
-      console.log('logged in with', username, password);
-    } catch (error) {
-      console.error(error);
+      pushNotification(`Logged in with ${user.name}`, 'info');
+    } catch ({ response }) {
+      console.log('error', response);
+
+      const backendMsg = response?.data?.error;
+      const userMsg = mapBackendErrors(backendMsg);
+      pushNotification(userMsg.join(' | '), 'error');
     }
   };
   return (
