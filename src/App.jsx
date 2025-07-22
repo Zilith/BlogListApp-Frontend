@@ -23,29 +23,30 @@ const App = () => {
 
   return (
     <div>
+      <Notification
+        notifications={notifications}
+        removeNotification={removeNotification}
+      />
       {user === null ? (
-        <LoginForm
-          setUser={setUser}
-          username={username}
-          setUsername={setUsername}
-          password={password}
-          setPassword={setPassword}
-        />
+        <LoginForm setUser={setUser} pushNotification={pushNotification} />
       ) : (
         <>
-          <p>{user.name} logged in</p>
-          <BlogForm
-            newBlogTitle={newBlogTitle}
-            newBlogUrl={newBlogUrl}
-            setNewBlogTitle={setNewBlogTitle}
-            setNewBlogUrl={setNewBlogUrl}
-          />
+          <UserInfo user={user} />
+          <LogoutButton setUser={setUser}/>
+          <Togglable buttonLabel={'New Blog'} ref={blogFormRef} >
+            <BlogForm
+              handleNewBlog={handleNewBlog}
+              newBlogTitle={newBlogTitle}
+              setNewBlogTitle={setNewBlogTitle}
+              newBlogUrl={newBlogUrl}
+              setNewBlogUrl={setNewBlogUrl}
+              newBlogAuthor={newBlogAuthor}
+              setNewBlogAuthor={setNewBlogAuthor}
+            />
+          </Togglable>
+          <BlogList blogs={blogs} />
         </>
       )}
-      <h2>blogs</h2>
-      {blogs.map((blog) => (
-        <Blog key={blog.id} blog={blog} />
-      ))}
     </div>
   );
 };
