@@ -30,17 +30,15 @@ const App = () => {
   const handleNewBlog = async (e) => {
     e.preventDefault();
 
-
     try {
       const newBlog = {
         title: newBlogTitle,
         url: newBlogUrl,
         author: newBlogAuthor,
       };
-      blogFormRef.current.toggleVisibility()
+      blogFormRef.current.toggleVisibility();
 
       const returnedBlog = await blogService.create(newBlog);
-
 
       pushNotification(
         `a new blog You're NOT gonna need it! by ${user.name} added`,
@@ -81,8 +79,8 @@ const App = () => {
       ) : (
         <>
           <UserInfo user={user} />
-          <LogoutButton setUser={setUser}/>
-          <Togglable buttonLabel={'New Blog'} ref={blogFormRef} >
+          <LogoutButton setUser={setUser} />
+          <Togglable buttonLabel={'New Blog'} ref={blogFormRef}>
             <BlogForm
               handleNewBlog={handleNewBlog}
               newBlogTitle={newBlogTitle}
@@ -93,7 +91,7 @@ const App = () => {
               setNewBlogAuthor={setNewBlogAuthor}
             />
           </Togglable>
-          <BlogList blogs={blogs} />
+          <BlogList blogs={blogs} setBlogs={setBlogs} />
         </>
       )}
     </div>
