@@ -40,6 +40,6 @@ const BlogForm = ({
       <button type="submit">Add Blog</button>
     </form>
   </>
-);
+)
 
-export default BlogForm;
+export default BlogForm

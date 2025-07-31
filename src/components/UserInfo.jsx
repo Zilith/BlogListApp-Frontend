@@ -1,3 +1,3 @@
-const UserInfo = ({ user }) => <div>{user.name} logged in</div>;
+const UserInfo = ({ user }) => <div>{user.name} logged in</div>
 
-export default UserInfo;
+export default UserInfo

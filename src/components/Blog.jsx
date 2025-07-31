@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState } from 'react'
 
 const Blog = ({ blog, handleAddLike, handleDelete }) => {
-  const [viewDetails, setViewDetails] = useState(false);
+  const [viewDetails, setViewDetails] = useState(false)
 
   const blogStyle = {
     paddingTop: 10,
@@ -9,13 +9,13 @@ const Blog = ({ blog, handleAddLike, handleDelete }) => {
     border: 'solid',
     borderWidth: 1,
     marginBottom: 5,
-  };
+  }
 
   const toggleVisibility = () => {
-    setViewDetails(!viewDetails);
-  };
+    setViewDetails(!viewDetails)
+  }
 
-  const hiddenToggle = { display: viewDetails ? '' : 'none' };
+  const hiddenToggle = { display: viewDetails ? '' : 'none' }
 
   return (
     <div style={blogStyle}>
@@ -35,7 +35,7 @@ const Blog = ({ blog, handleAddLike, handleDelete }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Blog;
+export default Blog

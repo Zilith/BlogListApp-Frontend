@@ -1,36 +1,36 @@
-import { useState } from 'react';
-import loginService from '../services/login';
-import blogService from '../services/blogs';
-import { mapBackendErrors } from '../utils/errorMessages';
+import { useState } from 'react'
+import loginService from '../services/login'
+import blogService from '../services/blogs'
+import { mapBackendErrors } from '../utils/errorMessages'
 
 const LoginForm = ({ setUser, pushNotification }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
 
   const handleLogin = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
     try {
       const user = await loginService.login({
         username,
         password,
-      });
+      })
 
-      window.localStorage.setItem('loggedBlogappUser', JSON.stringify(user));
-      blogService.setToken(user.token);
+      window.localStorage.setItem('loggedBlogappUser', JSON.stringify(user))
+      blogService.setToken(user.token)
 
-      setUser(user);
-      setUsername('');
-      setPassword('');
-      pushNotification(`Logged in with ${user.name}`, 'info');
+      setUser(user)
+      setUsername('')
+      setPassword('')
+      pushNotification(`Logged in with ${user.name}`, 'info')
     } catch ({ response }) {
-      console.log('error', response);
+      console.log('error', response)
 
-      const backendMsg = response?.data?.error;
-      const userMsg = mapBackendErrors(backendMsg);
-      pushNotification(userMsg.join(' | '), 'error');
+      const backendMsg = response?.data?.error
+      const userMsg = mapBackendErrors(backendMsg)
+      pushNotification(userMsg.join(' | '), 'error')
     }
-  };
+  }
   return (
     <>
       <h2>Login</h2>
@@ -57,7 +57,7 @@ const LoginForm = ({ setUser, pushNotification }) => {
         <button type="submit">Login</button>
       </form>
     </>
-  );
-};
+  )
+}
 
-export default LoginForm;
+export default LoginForm

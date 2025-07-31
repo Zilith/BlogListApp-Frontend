@@ -1,17 +1,17 @@
-import { useEffect } from 'react';
-import '../styles/Notification.css';
+import { useEffect } from 'react'
+import '../styles/Notification.css'
 
 const Notification = ({ notifications, removeNotification }) => {
   useEffect(() => {
     if (notifications.length) {
       const timer = setTimeout(() => {
-        removeNotification(); // Delete the notification after 5 seconds
-      }, 3000);
-      return () => clearTimeout(timer);
+        removeNotification() // Delete the notification after 5 seconds
+      }, 3000)
+      return () => clearTimeout(timer)
     }
-  }, [notifications, removeNotification]);
+  }, [notifications, removeNotification])
 
-  if (!notifications.length) return null;
+  if (!notifications.length) return null
 
   return (
     <div>
@@ -21,7 +21,7 @@ const Notification = ({ notifications, removeNotification }) => {
         </div>
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default Notification;
+export default Notification
